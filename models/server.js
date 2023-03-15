@@ -4,13 +4,17 @@ class Server {
     constructor(){
         this.app = express()
         this.port = process.env.PORT
+        this.middlewares()
         this.routes()
     }
 
+    middlewares() {
+        this.app.use(express.static('public'))
+    }
+
     routes() {
-        this.app.get('/', function (req, res) 
-        {
-            res.send('Hello World')
+        this.app.get('/helth-check', function (req, res) {
+            res.send('Service running ok')
         }
         )
     }
